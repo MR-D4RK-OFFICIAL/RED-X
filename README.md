@@ -19,11 +19,11 @@ The following Python libraries are required to run the script:
 - `playsound` – For playing background music or sound effects.
 - `colorama` – For colored terminal output.
 
-##TOOLS COMMAND 
-apt update 
-apt upgrade
+#### TOOLS RUN COMMAND 
+
+apt update && apt upgrade -y
 pkg install python3
 pip install requests playsound colorama
 git clone https://github.com/MR-D4RK-OFFICIAL/RED-X.git
 cd RED-X
-python red-x.py
+python3 red-x.py
