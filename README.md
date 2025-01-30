@@ -22,8 +22,8 @@ The following Python libraries are required to run the script:
 #### TOOLS RUN COMMAND 
 
 apt update && apt upgrade -y
-pkg install python3
-pip install requests playsound colorama
+pkg install python
+pip install requests threading tqdm colorama
 git clone https://github.com/MR-D4RK-OFFICIAL/RED-X.git
 cd RED-X
-python3 red-x.py
+python RED-X.py
